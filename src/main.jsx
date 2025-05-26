@@ -1,21 +1,13 @@
-// /src/main.jsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { HashRouter } from 'react-router-dom';
 
-// Estilos globales (opcional si usas Tailwind, Bootstrap, o CSS puro)
-import "./styles/index.css"; // Asegúrate de que este archivo exista
-
-// Punto de montaje en el DOM (el div con id="root" en index.html)
-const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("No se encontró el elemento #root en index.html");
-}
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <App />
+    </HashRouter>
   </React.StrictMode>
 );
