@@ -1,31 +1,23 @@
-// /src/App.jsx
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// src/App.jsx
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ToDoApp from './projects/ToDoApp';
+import WeatherDashboard from './projects/WeatherDashboard';
+import CalculatorApp from './projects/CalculatorApp';
+import Navbar from './components/Navbar';
 
-// Layout
-import MainLayout from "./layouts/MainLayout";
-
-// Página principal
-import Home from "./pages/Home";
-
-// Proyectos embebidos
-import ToDoApp from "./projects/ToDoApp/App";
-import CalculatorApp from "./Calculator/App";
-import WeatherDashboardApp from "./WeatherDashboard/App";
-
-const App = () => {
+function App() {
   return (
-    <Router>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/todo" element={<ToDoApp />} />
-          <Route path="/calculator" element={<CalculatorApp />} />
-          <Route path="/weather" element={<WeatherDashboardApp />} />
-        </Routes>
-      </MainLayout>
-    </Router>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/todo" element={<ToDoApp />} />
+        <Route path="/weather" element={<WeatherDashboard />} />
+        <Route path="/calculator" element={<CalculatorApp />} />
+      </Routes>
+    </>
   );
-};
+}
 
 export default App;
