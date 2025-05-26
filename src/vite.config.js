@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/mi-portafolio/', // Muy importante para GitHub Pages
+  base: '/mi-portafolio/', // Asegura rutas correctas en GitHub Pages
 });
