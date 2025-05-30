@@ -1,8 +1,23 @@
 import React from "react";
-import Home from "./pages/Home";
+import Calculator from "../components/Calculator";
+import Dashboard from "../components/Dashboard";
+import ToDoList from "../components/ToDoList";
 
-const App = () => {
-  return <Home />;
+const Home = () => {
+  return (
+    <div>
+      <h1>Bienvenido a mi portafolio SPA</h1>
+      <section>
+        <Calculator />
+      </section>
+      <section>
+        <Dashboard />
+      </section>
+      <section>
+        <ToDoList />
+      </section>
+    </div>
+  );
 };
 
-export default App;
+export default Home;
