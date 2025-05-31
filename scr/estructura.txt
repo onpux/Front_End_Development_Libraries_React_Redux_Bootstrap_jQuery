@@ -1,0 +1,4 @@
+// Estructura de carpetas para el portafolio
+// ToDoApp: Aplicación con React + Redux
+// Calculadora: Calculadora estilizada con Bootstrap
+// DashboardClima: Interfaz que consume API pública con Axios
