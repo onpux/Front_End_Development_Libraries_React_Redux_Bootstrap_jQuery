@@ -1,26 +1,12 @@
-# 🧠 Portafolio Frontend con React y Vite
+# React + Vite
 
-Este portafolio presenta tres proyectos desarrollados con bibliotecas modernas de frontend como React, Redux, Bootstrap y jQuery. La arquitectura sigue una estructura modular con énfasis en mantenibilidad, escalabilidad y claridad del código.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 📁 Estructura del Proyecto
+Currently, two official plugins are available:
 
-- **ToDoApp**: Aplicación con React + Redux.
-- **Calculadora**: Calculadora estilizada con Bootstrap.
-- **Dashboard Clima**: Interfaz que consume API pública con Axios.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🚀 Tecnologías Usadas
+## Expanding the ESLint configuration
 
-- Vite + React
-- Redux Toolkit
-- Bootstrap 5
-- React Router DOM
-- Axios para APIs
-- Eslint para calidad del código
-
-## 📦 Instalación
-
-```bash
-git clone https://github.com/tu-usuario/mi-portafolio.git
-cd mi-portafolio
-npm install
-npm run dev
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
