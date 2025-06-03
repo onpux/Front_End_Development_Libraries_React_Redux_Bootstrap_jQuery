@@ -1,13 +1,178 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos React Sencillos</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; margin-bottom: 32px; }
+    .projects { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+    .project { flex: 1 1 280px; min-width: 280px; background: #fafafa; border-radius: 8px; box-shadow: 0 1px 4px #0001; padding: 24px; }
+    .project h2 { text-align: center; }
+    /* To-Do List styles */
+    .todo-list input[type="text"] { width: 70%; padding: 6px; }
+    .todo-list button { padding: 6px 12px; margin-left: 8px; }
+    .todo-list ul { list-style: none; padding: 0; }
+    .todo-list li { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; }
+    .todo-list li.completed { text-decoration: line-through; color: #888; }
+    /* Calculator styles */
+    .calculator { display: flex; flex-direction: column; align-items: center; }
+    .calculator-screen { width: 180px; height: 40px; margin-bottom: 8px; text-align: right; font-size: 1.2em; padding: 6px; border: 1px solid #ccc; border-radius: 4px; background: #f9f9f9; }
+    .calculator-buttons { display: grid; grid-template-columns: repeat(4, 44px); gap: 6px; }
+    .calculator-buttons button { height: 40px; font-size: 1.1em; border-radius: 4px; border: 1px solid #ddd; background: #eee; cursor: pointer; }
+    .calculator-buttons button:active { background: #ddd; }
+    /* Weather Dashboard styles */
+    .weather-dashboard input[type="text"] { width: 70%; padding: 6px; }
+    .weather-dashboard button { padding: 6px 12px; margin-left: 8px; }
+    .weather-info { margin-top: 16px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Proyectos React Sencillos</h1>
+    <div class="projects">
+      <div class="project">
+        <h2>To-Do List</h2>
+        <div id="todo-root"></div>
+      </div>
+      <div class="project">
+        <h2>Calculadora</h2>
+        <div id="calc-root"></div>
+      </div>
+      <div class="project">
+        <h2>Dashboard del Clima</h2>
+        <div id="weather-root"></div>
+      </div>
+    </div>
+  </div>
+  <!-- React, ReactDOM y Babel desde CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Código React -->
+  <script type="text/babel">
+    // To-Do List
+    function TodoList() {
+      const [tasks, setTasks] = React.useState([]);
+      const [input, setInput] = React.useState("");
+      const addTask = () => {
+        if (input.trim() !== "") {
+          setTasks([...tasks, { text: input, completed: false }]);
+          setInput("");
+        }
+      };
+      const toggleTask = idx => {
+        setTasks(tasks.map((t, i) => i === idx ? { ...t, completed: !t.completed } : t));
+      };
+      const removeTask = idx => {
+        setTasks(tasks.filter((_, i) => i !== idx));
+      };
+      return (
+        <div className="todo-list">
+          <input
+            type="text"
+            value={input}
+            placeholder="Nueva tarea..."
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && addTask()}
+          />
+          <button onClick={addTask}>Agregar</button>
+          <ul>
+            {tasks.map((task, idx) => (
+              <li key={idx} className={task.completed ? "completed" : ""}>
+                <span onClick={() => toggleTask(idx)} style={{ cursor: 'pointer', flex: 1 }}>{task.text}</span>
+                <button onClick={() => removeTask(idx)} style={{ marginLeft: 8 }}>X</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    // Calculadora
+    function Calculator() {
+      const [value, setValue] = React.useState("");
+      const handleClick = val => {
+        if (val === "C") setValue("");
+        else if (val === "=") {
+          try {
+            setValue(eval(value).toString());
+          } catch {
+            setValue("Error");
+          }
+        } else {
+          setValue(value + val);
+        }
+      };
+      const buttons = [
+        "7", "8", "9", "/",
+        "4", "5", "6", "*",
+        "1", "2", "3", "-",
+        "0", ".", "C", "+",
+        "="
+      ];
+      return (
+        <div className="calculator">
+          <input className="calculator-screen" value={value} readOnly />
+          <div className="calculator-buttons">
+            {buttons.map((b, i) => (
+              <button key={i} onClick={() => handleClick(b)}>{b}</button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // Dashboard del Clima
+    function WeatherDashboard() {
+      const [city, setCity] = React.useState("");
+      const [weather, setWeather] = React.useState(null);
+      const [error, setError] = React.useState("");
+      const getWeather = async () => {
+        setError("");
+        setWeather(null);
+        if (!city.trim()) return;
+        try {
+          const res = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
+          if (!res.ok) throw new Error("No se pudo obtener el clima");
+          const data = await res.json();
+          setWeather({
+            temp: data.current_condition[0].temp_C,
+            desc: data.current_condition[0].weatherDesc[0].value,
+            feels: data.current_condition[0].FeelsLikeC
+          });
+        } catch {
+          setError("No se pudo obtener el clima. Intenta otra ciudad.");
+        }
+      };
+      return (
+        <div className="weather-dashboard">
+          <input
+            type="text"
+            value={city}
+            placeholder="Ciudad (ej: Madrid)"
+            onChange={e => setCity(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && getWeather()}
+          />
+          <button onClick={getWeather}>Buscar</button>
+          {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+          {weather && (
+            <div className="weather-info">
+              <div><b>Temperatura:</b> {weather.temp}°C</div>
+              <div><b>Sensación:</b> {weather.feels}°C</div>
+              <div><b>Descripción:</b> {weather.desc}</div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Renderizar los componentes
+    ReactDOM.createRoot(document.getElementById('todo-root')).render(<TodoList />);
+    ReactDOM.createRoot(document.getElementById('calc-root')).render(<Calculator />);
+    ReactDOM.createRoot(document.getElementById('weather-root')).render(<WeatherDashboard />);
+  </script>
+</body>
 </html>
