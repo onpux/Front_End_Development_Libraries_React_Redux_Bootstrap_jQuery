@@ -1,0 +1,28 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+#root {
+  max-width: 1100px;
+  margin: 48px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #0002;
+  padding: 40px 32px 32px 32px;
+  border: 1px solid #e3e3e3;
+}
+.titulo-principal {
+  text-align: center;
+  margin-bottom: 36px;
+  color: #2d5c8a;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 2.3em;
+  text-shadow: 0 2px 8px #b3d8f7;
+}
+.nav-tabs {
+  margin-bottom: 32px;
+}
