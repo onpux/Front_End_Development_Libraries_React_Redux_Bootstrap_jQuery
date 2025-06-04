@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -8,21 +8,79 @@ body {
 #root {
   max-width: 1100px;
   margin: 48px auto;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.97);
   border-radius: 18px;
-  box-shadow: 0 8px 32px #0002;
+  box-shadow: 0 8px 32px #fda08555;
   padding: 40px 32px 32px 32px;
-  border: 1px solid #e3e3e3;
+  border: 1.5px solid #fda085;
 }
 .titulo-principal {
   text-align: center;
   margin-bottom: 36px;
-  color: #2d5c8a;
+  color: #f85c50;
   letter-spacing: 1px;
   font-weight: 700;
   font-size: 2.3em;
-  text-shadow: 0 2px 8px #b3d8f7;
+  text-shadow: 0 2px 8px #fda08599;
 }
 .nav-tabs {
   margin-bottom: 32px;
+  border-bottom: 2px solid #fda085;
+}
+.nav-tabs .nav-link {
+  color: #b85c38;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  background: #fffbe7;
+  margin-right: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-tabs .nav-link.active {
+  background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+  color: #fff;
+  border: none;
+}
+.list-group-item {
+  border: 1px solid #fda08555;
+  border-radius: 6px !important;
+  margin-bottom: 6px;
+  background: #fffbe7;
+  transition: background 0.2s;
+}
+.list-group-item-success {
+  background: #f6d36555 !important;
+  color: #b85c38;
+}
+.btn-primary, .btn-info {
+  background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #fda08533;
+  transition: background 0.2s;
+}
+.btn-primary:hover, .btn-info:hover {
+  background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+}
+.btn-danger {
+  background: #f85c50;
+  border: none;
+}
+.btn-danger:hover {
+  background: #b85c38;
+}
+.form-control:focus {
+  border-color: #fda085;
+  box-shadow: 0 0 0 0.2rem #fda08533;
+}
+.alert-success {
+  background: #f6d36533;
+  color: #b85c38;
+  border: 1.5px solid #fda085;
+}
+.alert-danger {
+  background: #f85c5033;
+  color: #b85c38;
+  border: 1.5px solid #fda085;
 }
