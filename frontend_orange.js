@@ -149,6 +149,32 @@ ReactDOM.createRoot(document.getElementById('redux-tasks')).render(
 );
 
 // --- Weather App (Project 3, jQuery + OpenWeather) ---
+const mockWeather = {
+  "New York": {
+    name: "New York", sys: { country: "US" }, weather: [{ main: "Clouds", description: "broken clouds" }], main: { temp: 22, humidity: 65 }
+  },
+  "London": {
+    name: "London", sys: { country: "GB" }, weather: [{ main: "Rain", description: "light rain" }], main: { temp: 16, humidity: 80 }
+  },
+  "Paris": {
+    name: "Paris", sys: { country: "FR" }, weather: [{ main: "Clear", description: "clear sky" }], main: { temp: 24, humidity: 55 }
+  },
+  "Tokyo": {
+    name: "Tokyo", sys: { country: "JP" }, weather: [{ main: "Clouds", description: "scattered clouds" }], main: { temp: 27, humidity: 70 }
+  },
+  "Mexico City": {
+    name: "Mexico City", sys: { country: "MX" }, weather: [{ main: "Thunderstorm", description: "thunderstorm" }], main: { temp: 20, humidity: 75 }
+  },
+  "Buenos Aires": {
+    name: "Buenos Aires", sys: { country: "AR" }, weather: [{ main: "Clear", description: "clear sky" }], main: { temp: 18, humidity: 60 }
+  },
+  "Madrid": {
+    name: "Madrid", sys: { country: "ES" }, weather: [{ main: "Clear", description: "sunny" }], main: { temp: 28, humidity: 40 }
+  },
+  "Berlin": {
+    name: "Berlin", sys: { country: "DE" }, weather: [{ main: "Clouds", description: "overcast clouds" }], main: { temp: 19, humidity: 68 }
+  }
+};
 $('#weather-app').html(`
   <div class="input-group mb-3">
     <input type="text" id="cityInput" class="form-control" placeholder="Enter city...">
@@ -174,20 +200,22 @@ $('#cityInput').on('keydown', function(e) {
   if(e.key === 'Enter') $('#getWeather').trigger('click');
 });
 $('#getWeather').on('click', function() {
-  const city = $('#cityInput').val();
+  const city = $('#cityInput').val().trim();
   if(!city) return;
   $('#weatherResult').html('<span>Loading...</span>');
-  $.getJSON(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=demo&units=metric`, function(data) {
-    $('#weatherResult').html(`
-      <div class='card p-3'>
-        <h5>${data.name}, ${data.sys.country}</h5>
-        <p><b>${data.weather[0].main}</b> - ${data.weather[0].description}</p>
-        <p>🌡️ ${data.main.temp}°C</p>
-        <p>💧 Humidity: ${data.main.humidity}%</p>
-      </div>
-    `);
-  }).fail(function(){
-    $('#weatherResult').html('<span class="text-danger">City not found or API error.</span>');
-  });
+  setTimeout(function() {
+    const data = mockWeather[city];
+    if(data) {
+      $('#weatherResult').html(`
+        <div class='card p-3'>
+          <h5>${data.name}, ${data.sys.country}</h5>
+          <p><b>${data.weather[0].main}</b> - ${data.weather[0].description}</p>
+          <p>🌡️ ${data.main.temp}°C</p>
+          <p>💧 Humidity: ${data.main.humidity}%</p>
+        </div>
+      `);
+    } else {
+      $('#weatherResult').html('<span class="text-danger">City not found in mock data.</span>');
+    }
+  }, 500);
 });
-
