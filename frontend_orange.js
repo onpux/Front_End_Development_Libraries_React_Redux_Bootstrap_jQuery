@@ -51,14 +51,38 @@ const financeData = [
   { label: "Savings", value: 1100 }
 ];
 function Dashboard() {
-  const [data] = React.useState(financeData);
-  return React.createElement('div', {className:'row'},
-    data.map((d,i) =>
-      React.createElement('div', {className:'col-md-4 mb-3', key:i},
-        React.createElement('div', {className:'card text-center'},
-          React.createElement('div', {className:'card-body'},
-            React.createElement('h5', {className:'card-title'}, d.label),
-            React.createElement('p', {className:'card-text fs-3'}, `$${d.value}`)
+  const [data, setData] = React.useState(financeData);
+  const [incomeInput, setIncomeInput] = React.useState("");
+  function updateIncome() {
+    const val = parseFloat(incomeInput);
+    if (!isNaN(val)) {
+      setData(data.map(d => d.label === "Income" ? { ...d, value: val } : d));
+      setIncomeInput("");
+    }
+  }
+  return React.createElement('div', null,
+    React.createElement('div', {className:'mb-4'},
+      React.createElement('input', {
+        type: 'number',
+        className: 'form-control d-inline-block',
+        style: {width: '160px', marginRight: '8px'},
+        value: incomeInput,
+        onChange: e => setIncomeInput(e.target.value),
+        placeholder: 'Set new income...'
+      }),
+      React.createElement('button', {
+        className: 'btn btn-warning',
+        onClick: updateIncome
+      }, 'Update Income')
+    ),
+    React.createElement('div', {className:'row'},
+      data.map((d,i) =>
+        React.createElement('div', {className:'col-md-4 mb-3', key:i},
+          React.createElement('div', {className:'card text-center'},
+            React.createElement('div', {className:'card-body'},
+              React.createElement('h5', {className:'card-title'}, d.label),
+              React.createElement('p', {className:'card-text fs-3'}, `$${d.value}`)
+            )
           )
         )
       )
