@@ -56,7 +56,12 @@ function Dashboard() {
   function updateIncome() {
     const val = parseFloat(incomeInput);
     if (!isNaN(val)) {
-      setData(data.map(d => d.label === "Income" ? { ...d, value: val } : d));
+      // Expenses = 65% of income, Savings = 35% of income
+      setData([
+        { label: "Income", value: val },
+        { label: "Expenses", value: Math.round(val * 0.65) },
+        { label: "Savings", value: Math.round(val * 0.35) }
+      ]);
       setIncomeInput("");
     }
   }
