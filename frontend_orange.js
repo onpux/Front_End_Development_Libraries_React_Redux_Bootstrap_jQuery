@@ -154,8 +154,25 @@ $('#weather-app').html(`
     <input type="text" id="cityInput" class="form-control" placeholder="Enter city...">
     <button id="getWeather" class="btn btn-warning">Get Weather</button>
   </div>
+  <div class="mb-2" id="city-suggestions">
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">New York</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">London</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Paris</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Tokyo</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Mexico City</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Buenos Aires</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Madrid</span>
+    <span class="badge bg-warning text-dark city-sugg" style="cursor:pointer;">Berlin</span>
+  </div>
   <div id="weatherResult"></div>
 `);
+$('.city-sugg').on('click', function() {
+  $('#cityInput').val($(this).text());
+  $('#getWeather').trigger('click');
+});
+$('#cityInput').on('keydown', function(e) {
+  if(e.key === 'Enter') $('#getWeather').trigger('click');
+});
 $('#getWeather').on('click', function() {
   const city = $('#cityInput').val();
   if(!city) return;
@@ -173,3 +190,4 @@ $('#getWeather').on('click', function() {
     $('#weatherResult').html('<span class="text-danger">City not found or API error.</span>');
   });
 });
+
