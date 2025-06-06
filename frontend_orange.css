@@ -11,12 +11,12 @@ body {
   left: 0; top: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
+  z-index: 0; /* Asegura que el sol esté detrás de todo */
   pointer-events: none;
 }
 .main-header {
   position: relative;
-  z-index: 10;
+  z-index: 2;
   color: #fff;
   background: transparent;
   text-shadow: 0 2px 24px #fff8, 0 0 8px #ffd60099;
@@ -28,13 +28,23 @@ body {
   letter-spacing: 1px;
 }
 .project {
-  background: rgba(255,255,255,0.97);
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #ff980022;
-  padding: 32px 24px 18px 24px;
-  color: #333;
+  background: rgba(180,180,190,0.22);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px #ff980033, 0 1.5px 0 #fff2;
+  padding: 2rem 2.2rem 1.5rem 2.2rem;
+  color: #3e2723;
+  backdrop-filter: blur(2px);
+  transition: box-shadow 0.2s;
   position: relative;
-  z-index: 5;
+  z-index: 2;
+}
+.project:hover {
+  box-shadow: 0 8px 32px #ff980055, 0 2px 0 #fff3;
+}
+.container {
+  background: transparent;
+  position: relative;
+  z-index: 2;
 }
 footer {
   text-align: center;
